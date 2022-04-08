@@ -52,11 +52,11 @@ class GoogleQR
   def base_url
     "http#{self.use_https ? 's' : ''}://chart.googleapis.com/chart?cht=qr&"
   end
-
+  
   def error_correction_param?
     self.error_correction || self.margin
   end
-
+  
   def error_correction_params
     if !self.error_correction && self.margin
       param = "L|#{self.margin}"
@@ -64,14 +64,13 @@ class GoogleQR
       param = self.error_correction
     else
       param = "#{self.error_correction}|#{self.margin}"
-    end
-
+    end  
+    
     "chld=#{escape_string(param)}"
   end
-
+  
   def escape_string(string)
-    # URI.encode(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
-    URI.encode_www_form_component(string)
+    URI.encode(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
-
+  
 end

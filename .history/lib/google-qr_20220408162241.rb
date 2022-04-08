@@ -70,8 +70,7 @@ class GoogleQR
   end
 
   def escape_string(string)
-    # URI.encode(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
-    URI.encode_www_form_component(string)
+    URI.encode_www_form_component(string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
   end
 
 end
